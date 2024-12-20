@@ -177,7 +177,7 @@ export function AppSidebar() {
                 <AvatarImage src="/placeholder.svg" alt="User" />
                 <AvatarFallback>U</AvatarFallback>
               </Avatar>
-              <span>John Doe</span>
+              <span>Axmanur</span>
               <ChevronDown className="ml-auto h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
