@@ -21,6 +21,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 
 const historySchema = z.object({
   entityType: z.string(),
@@ -34,127 +36,141 @@ export function HistoryForm() {
   const form = useForm<z.infer<typeof historySchema>>({
     resolver: zodResolver(historySchema),
   })
+  const [data, setData] = useState<Record<string, FormDataEntryValue>>({})
 
   function onSubmit(values: z.infer<typeof historySchema>) {
     console.log(values)
+    setData(values)
     // TODO: Fetch and display the history based on the form values
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="entityType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Entity Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select entity type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="budget">Budget</SelectItem>
-                  <SelectItem value="project">Project</SelectItem>
-                  <SelectItem value="fund">Fund</SelectItem>
-                  <SelectItem value="commitment">Commitment</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="entityId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Entity ID (Optional)</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select specific entity" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {/* Add entity options here based on the selected entity type */}
-                  <SelectItem value="1">Entity 1</SelectItem>
-                  <SelectItem value="2">Entity 2</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                Select a specific entity to view its history, or leave blank for all entities of the selected type
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="grid grid-cols-2 gap-4">
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="startDate"
+            name="entityType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Start Date</FormLabel>
-                <FormControl>
-                  <Input 
-                    type="date" 
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
+                <FormLabel>Entity Type</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select entity type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="budget">Budget</SelectItem>
+                    <SelectItem value="project">Project</SelectItem>
+                    <SelectItem value="fund">Fund</SelectItem>
+                    <SelectItem value="commitment">Commitment</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
-            name="endDate"
+            name="entityId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>End Date</FormLabel>
-                <FormControl>
-                  <Input 
-                    type="date" 
-                    {...field}
-                    value={field.value || ""}
-                  />
-                </FormControl>
+                <FormLabel>Entity ID (Optional)</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select specific entity" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {/* Add entity options here based on the selected entity type */}
+                    <SelectItem value="1">Entity 1</SelectItem>
+                    <SelectItem value="2">Entity 2</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  Select a specific entity to view its history, or leave blank for all entities of the selected type
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-        </div>
-        <FormField
-          control={form.control}
-          name="actionType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Action Type (Optional)</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select action type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="create">Create</SelectItem>
-                  <SelectItem value="update">Update</SelectItem>
-                  <SelectItem value="delete">Delete</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                Filter by specific action type, or leave blank for all actions
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">View History</Button>
-      </form>
-    </Form>
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="startDate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Start Date</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="date" 
+                      {...field}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="endDate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>End Date</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="date" 
+                      {...field}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="actionType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Action Type (Optional)</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select action type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="create">Create</SelectItem>
+                    <SelectItem value="update">Update</SelectItem>
+                    <SelectItem value="delete">Delete</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  Filter by specific action type, or leave blank for all actions
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">View History</Button>
+        </form>
+      </Form>
+      {data && (
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle>Submitted Commitment Data</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+          </CardContent>
+        </Card>
+      )}
+    </>
   )
 }
 
