@@ -1,4 +1,4 @@
-import { HistoryForm } from "@/components/forms/HistoryForm"
+import { HistoryForm } from "@/components/HistoryForm";
 
 export default function HistoryPage() {
   return (
