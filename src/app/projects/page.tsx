@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 
 export default function ProjectsPage() {
-  const [projectData, setProjectData] = useState(null)
+  const [projectData, setProjectData] = useState<{ [key: string]: FormDataEntryValue } | null>(null)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()

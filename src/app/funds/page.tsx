@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 
 export default function FundsPage() {
-  const [fundData, setFundData] = useState(null)
+  const [fundData, setFundData] = useState<{ [key: string]: FormDataEntryValue } | null>(null)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()

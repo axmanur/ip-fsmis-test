@@ -85,7 +85,7 @@ export function MinistryAgencyForm() {
                 />
               </FormControl>
               <FormDescription>
-                Enter address in JSON format, e.g., {"en": "123 Main St", "fr": "123 Rue Principale"}
+                Enter address in JSON format, e.g., {`"en": "123 Main St", "fr": "123 Rue Principale"`}
               </FormDescription>
               <FormMessage />
             </FormItem>

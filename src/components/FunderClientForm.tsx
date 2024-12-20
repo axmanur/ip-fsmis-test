@@ -207,7 +207,7 @@ export function FunderClientForm() {
                 />
               </FormControl>
               <FormDescription>
-                Enter bank details in JSON format, e.g., [{"bankName": "Bank A", "accountNumber": "123456"}]
+                Enter bank details in JSON format, e.g., [{`"bankName": "Bank A", "accountNumber": "123456"`}]
               </FormDescription>
               <FormMessage />
             </FormItem>

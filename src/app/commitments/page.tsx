@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 
 export default function CommitmentsPage() {
-  const [commitmentData, setCommitmentData] = useState(null)
+  const [commitmentData, setCommitmentData] = useState<Record<string, FormDataEntryValue>>({})
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
